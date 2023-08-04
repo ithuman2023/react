@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <!-- JSX로 React 해보기 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        // 이벤트 처리
+        /*
+        React를 사용할 때 일반적으로 DOM 요소가 생성된 후 addEventListener 리스너를 추가하기 위해 호출할 필요가 없습니다. 
+        대신 요소가 처음 렌더링될 때 리스너를 제공하세요.
+        ES6 클래스를 사용하여 구성 요소를 정의할 때 일반적인 패턴은 이벤트 핸들러가 클래스의 메서드가 되는 것입니다. 
+        예를 들어 이 Toggle구성 요소는 사용자가 "켜기"와 "끄기" 상태 사이를 전환할 수 있는 버튼을 렌더링합니다.            
+        */
+        
+        class Toggle extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { isToggleOn : true};
+                /*
+                JSX 콜백에서 this의 의미에 주의해야 합니다 . JavaScript에서 클래스 메서드는 기본적으로 바인딩 되지 않습니다. 
+                아래 줄을 주석처리하면 에러가 발생합니다.
+                this.handleClick바인딩 하고 전달하는 것을 잊어버린 경우 onClick함수가 실제로 호출 될 때 'undefined'입니다.
+                */
+                this.handleClick = this.handleClick.bind(this);
+            }
+            handleClick() {
+                this.setState((prevState) => ({
+                        isToggleOn : !prevState.isToggleOn
+                    })
+                );
+            }
+            render() {
+                return (
+                <button onClick={this.handleClick}>
+                    {this.state.isToggleOn ? '켜기' : '끄기'}
+                </button>
+                );
+            }
+        }
+        /*
+        bind거슬리는 경우 이 문제를 해결할 수 있는 두 가지 방법이 있습니다. 
+        실험적인 공개 클래스 필드 구문 을 사용하는 경우 클래스 필드를 사용하여 콜백을 올바르게 바인딩할 수 있습니다.
+        */
+        class Button1 extends React.Component {
+            handleClick = () => {
+                console.log('this is:', this);
+            }
+
+            render() {
+                return (
+                    <button onClick={this.handleClick}>눌러봐1!</button>
+                );
+            }
+        }
+        /*
+        클래스 필드 구문을 사용하지 않는 경우 콜백에서 화살표 함수를 사용할 수 있습니다 .
+        */
+        class Button2 extends React.Component {
+            handleClick() {
+                console.log('this is:', this);
+            }
+
+            render() {
+                return (
+                    // 이벤트 지정에 화살표 함수 사용
+                    <button onClick={() => this.handleClick()}>눌러봐2!</button>
+                );
+            }
+        } 
+        
+        // 이벤트 핸들러에 인수 전달
+        class Button3 extends React.Component {
+            deleteRow(obj) {
+                console.log('받은 값 :' + JSON.stringify(obj));
+            }
+
+            render() {
+                return (
+                    <div>
+                        <button onClick={(e) => this.deleteRow({name:"한사람",age:22,gender:true}, e)}>삭제 1</button> &nbsp;
+                        <button onClick={this.deleteRow.bind(this, {name:"두사람",age:18,gender:false})}>삭제 2</button>
+                    </div>
+                );
+            }
+        } 
+        
+
+        ReactDOM.render(
+            <div>
+                <Button1/> &nbsp;
+                <Button2/> &nbsp;
+                <Toggle/>  &nbsp;
+                <br/> <br/>
+                <Button3/>
+            </div>,
+            document.querySelector('#app')
+        );
+
+    </script>
+</body>
+
+</html>

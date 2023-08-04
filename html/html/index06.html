@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <!-- JSX로 React 해보기 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <!--
+        JSX로 속성 지정
+        따옴표를 사용하여 문자열 리터럴을 속성으로 지정할 수 있습니다.
+        const element = <a href="https://www.reactjs.org"> link </a>;
+        속성에 JavaScript 표현식을 포함하기 위해 중괄호를 사용할 수도 있습니다:
+        const element = <img src={user.avatarUrl}></img>;
+        속성에 JavaScript 표현식을 포함할 때 중괄호 주위에 따옴표를 사용하지 마십시오. 따옴표(문자열 값의 경우) 또는 중괄호(표현식의 경우)를 사용해야 하지만 둘 다 같은 속성에 사용할 수는 없습니다.
+    -->
+    <script type="text/babel">
+        const image_url1 = "./images/image1.png";
+        const image_url2 = "./images/image2.png";
+        const link_element = <a href="https://reactjs.org/docs/introducing-jsx.html"> JSX 튜토리알로 가기</a>;
+        const img_element1 = <img src={image_url1}></img>;
+        const img_element2 = <img src={image_url2}></img>;
+        ReactDOM.render(
+            <div>
+                {link_element} <br/>
+                {img_element1} <br/>
+                {img_element2} <br/>
+            </div>,
+            document.querySelector('#app')
+        );
+    </script>
+</body>
+
+</html>

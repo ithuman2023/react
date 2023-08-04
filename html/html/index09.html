@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <!-- JSX로 React 해보기 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+
+</head>
+
+<body>
+    <div id="app1"></div>
+    <hr>
+    <div id="app2"></div>
+    <script type="text/babel">
+        /*
+        구성 요소 및 소품
+        구성 요소를 사용하면 UI를 독립적이고 재사용 가능한 부분으로 분할하고 각 부분을 개별적으로 생각할 수 있습니다. 
+        개념적으로 구성 요소는 JavaScript 함수와 같습니다. 
+        그들은 임의의 입력("props"라고 함)을 수락하고 화면에 표시되어야 하는 내용을 설명하는 React 요소를 반환합니다.       
+        */
+        // 함수의 사용
+        function WelcomeFunction(props) {
+            return <h2>{props.name}님 반갑습니다.</h2>;
+        }        
+        // ES6의 클래스 사용
+        class WelcomeClass extends React.Component {
+            render() {
+                return <h2>{this.props.name}님 반갑습니다.</h2>;
+            }
+        }
+
+        // 구성 요소의 사용
+        const element1 = <WelcomeFunction name="한사람" />;
+        const element2 = <WelcomeClass name="두사람" />;
+
+        ReactDOM.render(
+            <div>
+                {element1}
+                {element2}
+            </div>,
+            document.querySelector("#app1")
+        );
+
+        function App() {
+            return (
+                <div>
+                    <WelcomeFunction name="한사람" />
+                    <WelcomeFunction name="두사람" />
+                    <WelcomeFunction name="세사람" />
+                </div>
+            );
+        }
+
+        ReactDOM.render(
+            <App/>,
+            document.querySelector("#app2")
+        );
+    </script>
+</body>
+
+</html>

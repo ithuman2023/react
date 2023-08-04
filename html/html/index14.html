@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <!-- JSX로 React 해보기 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+</head>
+
+<body>
+    <button onclick="ClickFunction()">일반 이벤트 지정</button>
+    <br>
+    <form onsubmit="console.log('전송버튼 눌림(HTML)'); return false;">
+        <button type="submit">전송하기</button>
+    </form>
+    <hr>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        // 이벤트 처리
+        /*
+            React 요소로 이벤트를 처리하는 것은 DOM 요소에서 이벤트를 처리하는 것과 매우 유사합니다. 다음과 같은 몇 가지 구문 차이가 있습니다.
+            React 이벤트의 이름은 소문자가 아닌 camelCase를 사용하여 지정됩니다.
+            JSX를 사용하면 문자열이 아닌 이벤트 핸들러로 함수를 전달합니다.
+
+            또 다른 차이점은 React에서 기본 동작을 방지하기 위해 돌아갈 수 없다는 것 입니다. preventDefault명시적으로 호출해야 합니다 .
+        */
+        
+        function ClickFunction() {
+            alert('눌렀냐!!!');
+        }
+        // 리엑트 폼
+        function Form() {
+            function handleSubmit(e) {
+                e.preventDefault(); // preventDefault()를 명시적으로 호출
+                console.log('전송버튼 눌림(React)');
+            }
+
+            return (
+                <form onSubmit={handleSubmit}>
+                <button type="submit">전송하기</button>
+                </form>
+            );
+        }
+        ReactDOM.render(
+            <div>
+                <button onClick={ClickFunction}>리엑트 이벤트 지정</button>
+                <Form/>
+            </div>, 
+            document.querySelector('#app')
+        );
+
+    </script>
+</body>
+
+</html>

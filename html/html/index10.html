@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <!-- JSX로 React 해보기 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+    <style>
+        div.Comment{
+            padding: 15px; border: 1px solid gray; border-radius: 20px; text-align: left; width: 300px;
+        }
+        div.UserInfo-name { font-weight: bold;}
+        div.Comment-text { font-style: italic;}
+        div.Comment-date {text-align: right; font-size: 9pt;}
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        function formatDate(date) {
+            return date.toLocaleDateString();
+        }
+
+        function Comment(props) {
+            return (
+                <div className="Comment">
+                    <div>
+                        <img src={props.author.imageUrl} />
+                        <div className="UserInfo-name">
+                            {props.author.name}
+                        </div>
+                    </div>
+                    <div className="Comment-text">
+                        {props.text}
+                    </div>
+                    <div className="Comment-date">
+                        {formatDate(props.date)}
+                    </div>
+                </div>
+            );
+        }
+
+        const comment = {
+            date: new Date(),
+            text: 'React 학습을 즐기시기 바랍니다!',
+            author: {
+                name: 'Hello Kitty',
+                imageUrl: './images/HelloKitty.jpg'
+            }
+        };
+
+        ReactDOM.render(
+            <Comment
+                date={comment.date}
+                text={comment.text}
+                author={comment.author} />,
+            document.querySelector('#app')
+        );
+    </script>
+</body>
+
+</html>

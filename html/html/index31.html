@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <!-- JSX로 React 해보기 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- JS 숫자 라이브러리 -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        button {
+            height: 40px;
+            width: 200px;
+            margin: 10px;
+        }
+
+        .warning {
+            background-color: red;
+            text-align: center;
+            width: 100%;
+            padding: 10px;
+
+            font-size: 14pt;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        // 
+        /*
+
+
+        
+        */
+        // 물의 끓는점 판단하는 함수
+        function BoilingVerdict(props) {
+            if (props.celsius >= 100) {
+                return <p>물이 끓는 온도 이상입니다.</p>;
+            }
+            return <p>아직 물이 끓는 온도에 도달하지 못했습니다.</p>;
+        }
+        // 입력된 온도에 따라 끓는지를 판단하는 컴포넌트
+        class Calculator extends React.Component {
+            constructor(props) {
+                super(props);
+                this.handleChange = this.handleChange.bind(this);
+                this.state = { temperature: '98' };
+            }
+
+            handleChange(e) {
+                this.setState({ temperature: e.target.value });
+            }
+
+            render() {
+                const temperature = this.state.temperature;
+                return (
+                    <fieldset>
+                        <legend> 온도를 섭씨로 입력 </legend>
+                        <input
+                            type='number'
+                            value={temperature}
+                            onChange={this.handleChange} />
+                        <BoilingVerdict
+                            celsius={parseFloat(temperature)} />
+                    </fieldset>
+                );
+            }
+        }
+        ReactDOM.render(
+            <div>
+                <Calculator />
+            </div>,
+            document.querySelector('#app')
+        );
+
+    </script>
+</body>
+
+</html>

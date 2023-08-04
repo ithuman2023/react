@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <!-- JSX로 React 해보기 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+</head>
+
+<body>
+    <div id="app1"></div>
+    <hr>
+    <div id="app2"></div>
+    <hr>
+    <div id="app3"></div>
+    <hr>
+    <div id="app4"></div>
+    <script type="text/babel">
+        // 상태 및 수명 주기
+
+        // 시계 예
+        //  Rendering Elements 에서 우리는 UI를 업데이트하는 한 가지 방법만 배웠습니다. ReactDOM.render()렌더링된 출력을 변경하기 위해 호출 합니다.
+        function tick1() {
+            const element = (
+                <div>
+                    <h2>현재시간 : {new Date().toLocaleTimeString()}</h2>
+                </div>
+            );
+            ReactDOM.render(
+                element,
+                document.querySelector('#app1')
+            );
+        }
+        setInterval(tick1, 1000);
+
+        // Clock컴포넌트를 진정으로 재사용 가능하고 캡슐화하는 방법을 배울 것입니다. 자체 타이머를 설정하고 매초 자체 업데이트합니다.
+        // 시계가 어떻게 보이는지 캡슐화하여 시작할 수 있습니다.
+        function Clock(props) {
+            return (
+                <div>
+                <h2>현재시간 : {props.date.toLocaleTimeString()}</h2>
+                </div>
+            );
+        }
+        function tick2() {
+            ReactDOM.render(
+                <Clock date={new Date()} />,
+                document.querySelector('#app2')
+            );
+        }
+        setInterval(tick2, 1000);    
+        
+        /*
+        함수를 클래스로 변환 : Clock다음과 같은 5단계로 함수 구성 요소를 클래스로 변환할 수 있습니다 .
+        1. React.Component를 확장하는 동일한 이름 의 ES6 클래스 를 만듭니다 .
+        2. render()라는 단일 빈 메서드를 추가합니다 .
+        3. 함수의 본문을 render()메서드로 이동합니다.
+        4. 본체 props에서 this.propsrender()로 교체 하십시오.
+        5. 나머지 빈 함수 선언을 삭제합니다.        
+        */
+        class Clock2 extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <h2>현재시간 : {this.props.date.toLocaleTimeString()}</h2>
+                    </div>
+                );
+            }
+        }
+        function tick3() {
+            ReactDOM.render(
+                <Clock2 date={new Date()} />,
+                document.querySelector('#app3')
+            );
+        }
+        setInterval(tick3, 1000);
+        /*
+        클래스에 로컬 상태 추가
+        date3단계로 props에서 state로 이동할 것입니다 .
+        1. this.props.date에서 this.state.daterender()로 바꿉니다.
+        2. 클래스 생성자를 추가합니다.
+        3. <Clock />요소에서 date 속성을 제거합니다 .
+        */
+        class Clock3 extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {date: new Date()};
+            }
+            // setter
+            // 구성 요소 this.setState()는 로컬 상태에 대한 업데이트를 예약 하는데 사용 됩니다.
+            tick() {
+                this.setState({
+                    date: new Date()
+                });
+            }
+            // DOM에 렌더링된 후에 componentDidMount()이 실행됩니다. 
+            componentDidMount() {
+                this.timerID = setInterval(() => this.tick(), 1000);
+            }
+            // componentWillUnmount() 수명 주기  메서드에서 타이머를 분해합니다 .
+            componentWillUnmount() {
+                clearInterval(this.timerID);
+            }
+            render() {
+                return (
+                    <div>
+                        <h2>현재시간 : {this.state.date.toLocaleTimeString()}.</h2>
+                    </div>
+                );
+            }
+        }
+        ReactDOM.render(
+            <Clock3 />,
+            document.querySelector('#app4')
+        );
+    </script>
+</body>
+
+</html>

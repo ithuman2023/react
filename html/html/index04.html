@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <!-- JSX로 React 해보기 -->
+    <!--
+        왜 JSX인가?
+        React는 렌더링 로직이 본질적으로 다른 UI 로직과 결합되어 있다는 사실을 받아들입니다. 이벤트 처리 방식, 시간 경과에 따른 상태 변경 방식, 데이터 표시 준비 방식 등입니다.
+        마크업과 로직을 별도의 파일에 넣어 인위적으로 기술을 분리하는 대신 React는 두 가지를 모두 포함하는 "구성 요소"라고 하는 느슨하게 결합된 단위로 문제 를 분리 합니다. 
+        다음 섹션 에서 구성 요소에 대해 다시 다루 겠지만, 아직 JS에 마크업을 넣는 것이 익숙하지 않다면 이 강연 을 통해 그렇지 않다고 확신할 수 있을 것입니다.
+        React 는 JSX를 사용할 필요가 없지만 대부분의 사람들은 JavaScript 코드 내에서 UI로 작업할 때 시각적 보조 수단으로 도움이 된다고 생각합니다. 
+        또한 React가 더 유용한 오류 및 경고 메시지를 표시할 수 있습니다.         
+    -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        const user1 = {
+            name: "한사람",
+            age: 22,
+            gender: true
+        }
+        const user2 = {
+            name: "두사람",
+            age: 18,
+            gender: false
+        }
+
+        function formatUser(user) {
+            return user.name + "(" + user.age + "세, " + (user.gender ? "남" : "여") + ")";
+        }
+        // 반드시 루트태그가 있어야 한다.
+        // 가독성을 위해 JSX를 여러 줄로 나눕니다. 
+        // 필수 사항은 아니지만 이 작업을 수행할 때 자동 세미콜론 삽입의 위험을 피하기 위해 괄호로 묶는 것이 좋습니다 .
+        const element = (
+            <div>
+                <h2>{formatUser(user1)}</h2>
+                <h2>{formatUser(user2)}</h2>
+            </div>
+        );
+
+        ReactDOM.render(
+            element,
+            document.querySelector('#app')
+        );
+    </script>
+</body>
+
+</html>

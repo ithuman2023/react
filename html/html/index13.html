@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <!-- JSX로 React 해보기 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        // 상태 및 수명 주기
+        /*
+            DOM에 처음으로 렌더링 될 때마다 타이머 를 설정 하려고 합니다. Clock이것을 React에서는 "마운팅"이라고 합니다.
+            또한 에 의해 생성된 DOM이 제거될 때마다 해당 타이머를 지우고Clock 싶습니다 . 이것을 React에서는 "unmounting"이라고 합니다.        
+        */
+        function FormattedDate(props) {
+            return <h2>현재시간 : {props.date.toLocaleTimeString()}</h2>;
+        }
+
+        class Clock extends React.Component {
+            constructor(props) {
+                super(props);
+                //console.log(props);
+                this.state = {date: new Date()};
+                console.log('state : ' + JSON.stringify(this.state));
+            }
+            tick() {
+                this.setState({date: new Date()});
+            }
+            // DOM에 렌더링된 후에 실행
+            componentDidMount() {
+                this.timerID = setInterval(() => this.tick(),1000);
+            }
+            // DOM에서 제거되면 실행
+            componentWillUnmount() {
+                clearInterval(this.timerID);
+            }
+            render() {
+                return (
+                    <div>
+                        <FormattedDate date={this.state.date} />
+                    </div>
+                );
+            }
+        }
+        // Clock은 자체 타이머를 설정하고 독립적으로 업데이트합니다.
+        function App() {
+            return (
+                <div>
+                    <Clock />
+                    <Clock />
+                    <Clock />
+                </div>
+            );
+        }
+        ReactDOM.render(<App />, document.querySelector('#app'));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <!-- JSX로 React 해보기 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        button {
+            height: 40px;
+            width: 200px;
+            margin: 10px;
+        }
+
+        .warning {
+            background-color: red;
+            text-align: center;
+            width: 100%;
+            padding: 10px;
+
+            font-size: 14pt;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        // 조건부 렌더링
+        /*
+        React에서는 필요한 동작을 캡슐화하는 고유한 구성 요소를 만들 수 있습니다. 그런 다음 애플리케이션 상태에 따라 일부만 렌더링할 수 있습니다.
+        React의 조건부 렌더링은 JavaScript에서 조건이 작동하는 것과 같은 방식으로 작동합니다. 
+        if 또는 조건부 연산자와 같은 JavaScript 연산자를 사용하여 현재 상태를 나타내는 요소를 만들고 React가 이에 맞게 UI를 업데이트하도록 합니다.
+
+        구성 요소 렌더링 방지
+        드문 경우지만 구성 요소가 다른 구성 요소에 의해 렌더링된 경우에도 자신을 숨기기를 원할 수 있습니다. 이 작업을 수행하려면 null을 출력 대신 반환합니다.
+        */
+
+        function WarningBanner(props) {
+            if (!props.warn) {
+                return null; // 숨기려면 null 리턴
+            }
+
+            return (
+                <div className="warning">
+                    Warning!
+                </div>
+            );
+        }
+
+        class Page extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { showWarning: true };
+                this.handleToggleClick = this.handleToggleClick.bind(this);
+            }
+
+            handleToggleClick() {
+                this.setState(state => ({
+                    showWarning: !state.showWarning
+                }));
+            }
+
+            render() {
+                return (
+                    <div>
+                        <button onClick={this.handleToggleClick}>{this.state.showWarning ? '숨기기' : '보이기'}</button>
+                        <WarningBanner warn={this.state.showWarning} />
+                    </div>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <Page />,
+            document.querySelector('#app')
+        );
+
+    </script>
+</body>
+
+</html>

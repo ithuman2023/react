@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <!-- JSX로 React 해보기 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- JS 숫자 라이브러리 -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        button {
+            height: 40px;
+            width: 200px;
+            margin: 10px;
+        }
+
+        .warning {
+            background-color: red;
+            text-align: center;
+            width: 100%;
+            padding: 10px;
+
+            font-size: 14pt;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        // 키
+        /*
+        Key는 React가 어떤 항목을 변경, 추가 또는 삭제할지 식별하는 것을 돕습니다. key는 엘리먼트에 안정적인 고유성을 부여하기 위해 배열 내부의 엘리먼트에 지정해야 합니다.
+        Key를 선택하는 가장 좋은 방법은 리스트의 다른 항목들 사이에서 해당 항목을 고유하게 식별할 수 있는 문자열을 사용하는 것입니다. 대부분의 경우 데이터의 ID를 key로 사용합니다.
+        렌더링 한 항목에 대한 안정적인 ID가 없다면 최후의 수단으로 항목의 인덱스를 key로 사용할 수 있습니다.
+        항목의 순서가 바뀔 수 있는 경우 key에 인덱스를 사용하는 것은 권장하지 않습니다. 이로 인해 성능이 저하되거나 컴포넌트의 state와 관련된 문제가 발생할 수 있습니다.
+        리스트 항목에 명시적으로 key를 지정하지 않으면 React는 기본적으로 인덱스를 key로 사용합니다.
+        */
+
+        // 예시: 잘못된 Key 사용법
+        function ListItem(props) {
+            const value = props.value;
+            return (
+                // 틀렸습니다! 여기에는 key를 지정할 필요가 없습니다.
+                <li key={value.toString()}>아이템 {value}</li>
+            );
+        }
+
+        function NumberList(props) {
+            const numbers = props.numbers;
+            const listItems = numbers.map((number) =>
+                // 틀렸습니다! 여기에 key를 지정해야 합니다.
+                <ListItem value={number} />
+            );
+            return (
+                <ul>
+                    {listItems}
+                </ul>
+            );
+        }
+        const numbers = [1, 2, 3, 4, 5];
+        ReactDOM.render(
+            <div>
+                <NumberList numbers={numbers} />
+            </div>,
+            document.querySelector('#app')
+        );
+
+    </script>
+</body>
+
+</html>

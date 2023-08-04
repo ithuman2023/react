@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <!-- JSX로 React 해보기 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- JS 숫자 라이브러리 -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        button {
+            height: 40px;
+            width: 200px;
+            margin: 10px;
+        }
+
+        .warning {
+            background-color: red;
+            text-align: center;
+            width: 100%;
+            padding: 10px;
+
+            font-size: 14pt;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+        // 목록 및 키
+        /*
+        기본 목록 구성 요소
+        일반적으로 구성 요소 내에서 목록을 렌더링합니다 .
+        이전 예제를 요소의 배열을 받아들이고 numbers요소 목록을 출력하는 구성 요소로 리팩토링할 수 있습니다.
+
+        이 코드를 실행하면 목록 항목에 대해 key를 제공해야 한다는 경고가 표시됩니다. 
+        "key"는 요소 목록을 생성할 때 포함해야 하는 특수 문자열 속성입니다. 
+        */
+       
+       function NumberList1(props) {
+           const numbers = props.numbers;
+           const listItems = numbers.map((number) =>
+                <li  key={number.toString()}>
+                    아이템 {numeral(number).format('000')}
+                </li>
+           );
+           return (
+               <ul>{listItems}</ul>
+            );
+        }
+        // key내부의 목록 항목에 할당 하고 누락된 key 문제를 수정하겠습니다.        
+        function NumberList2(props) {
+            const numbers = props.numbers;
+            const listItems = numbers.map((number) =>
+                <li key={number.toString()}>
+                    항목 {numeral(number * 10).format('000')}
+                </li>
+            );
+            return (
+                <ol>{listItems}</ol>
+            );
+        }
+
+        const numbers = [1, 2, 3, 4, 5];
+        ReactDOM.render(
+            <div>
+                <NumberList1 numbers={numbers} />
+                <br/>
+                <hr/>
+                <br/>
+                <NumberList2 numbers={numbers} />
+            </div>,
+            document.querySelector('#app')
+        );
+
+    </script>
+</body>
+
+</html>
