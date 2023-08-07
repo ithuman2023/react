@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>React Ex003 컴포넌트</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+    <style>
+      div.divBox{
+        border : 1px solid gray;
+        border-radius: 50px; text-align: center;
+      }
+    </style>
+    <script type="text/babel">
+    /*
+    React 구성 요소의 좋은 점은 바로 JavaScript라는 점입니다. JavaScript 관점에서 React 구성 요소를 작성하는 방법을 살펴보겠습니다.
+    구성요소 생성
+    React에서 컴포넌트는 함수입니다. 
+
+    두 가지 작업을 수행해야 합니다.
+    첫째, React 구성 요소는 일반 HTML 및 JavaScript와 구별하기 위해 대문자로 표시되어야 합니다.
+    둘째, 꺾쇠 괄호와 함께 일반 HTML 태그를 사용하는 것과 같은 방식으로 React 구성 요소를 사용합니다. 
+
+    이 구성 요소를 DOM에 렌더링하려면 메서드의 첫 번째 인수로 전달할 수 있습니다
+    */
+    function Header() {
+      return (<h1>😀 Hello React 01!!! 😘</h1>)
+    }
+    // 중첩 요소의 표현
+    function HomePage() {
+      return (
+          <div className="divBox">
+           <Header />
+           <Header />
+          </div>
+      );
+    }
+		window.onload = function(){
+			const domContainer = document.querySelector('#app1');
+      ReactDOM.render(<Header/>, domContainer);
+
+      const domContainer2 = document.querySelector('#app2');
+      ReactDOM.render(<HomePage/>, domContainer2);
+		}
+    </script>
+</head>
+<body>
+	<div id="app1"></div>
+	<div id="app2"></div>
+</body>
+</html>

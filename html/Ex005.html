@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>React Ex004 변수전달</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+    <style>
+      div.divBox{
+        border : 1px solid gray;
+        border-radius: 50px; text-align: center;
+      }
+    </style>
+    <script type="text/babel">
+    function HomePage() {
+      const [likes, setLikes] = React.useState(1);
+
+      function handleClick() {
+        console.log('버튼이' + likes + '번 클릭됨 :');
+        setLikes(likes + 1);
+      }
+      return (
+        <div>
+          <button onClick={handleClick}>눌러줘!!({likes})</button>
+        </div>
+      );
+    }
+		window.onload = function(){
+      const domContainer = document.querySelector('#app1');
+      ReactDOM.render(<HomePage/>, domContainer);
+		}
+    </script>
+</head>
+<body>
+	<div id="app1"></div>
+</body>
+</html>

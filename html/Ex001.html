@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>React Ex001 HTML인 경우</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+</head>
+<body>
+	<!--/* 순수 자바스크립트로 하면 다음과 같다. */-->
+	<div id="app1"></div>
+	<script type="text/javascript">
+		app = document.querySelector("#app1");
+		app.innerHTML = "<h1>😀 Hello JS 01!!! 😘</h1>"
+	</script>
+
+	<!--/* 순수 자바스크립트로 하면 다음과 같다. */-->
+	<div id="app2"></div>
+	<script type="text/javascript">
+		app = document.querySelector("#app2");
+		header = document.createElement('h1');
+		headerContent = document.createTextNode("😀 Hello JS 02!!! 😘");
+  	    header.appendChild(headerContent);
+  	    app.appendChild(header);
+	</script>
+
+	<!--/* react로 하면 다음과 같다. */-->
+	<div id="app3"></div>
+	<div id="app4"></div>
+    <script type="text/babel">
+       const domContainer = document.querySelector('#app3');
+       ReactDOM.render(<h1>😀 Hello React 01!!! 😘</h1>, domContainer);
+       ReactDOM.render(<h1>😀 Hello React 02!!! 😘</h1>, document.querySelector('#app4'));
+    </script>
+</body>
+</html>

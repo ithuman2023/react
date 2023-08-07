@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>React Ex002 React사용</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+    <script type="text/babel">
+		window.onload = function(){
+			const domContainer = document.querySelector('#app1');
+			ReactDOM.render(<h1>😀 Hello React 01!!! 😘</h1>, domContainer);
+			ReactDOM.render(<h1>😀 Hello React 02!!! 😘</h1>, document.querySelector('#app2'));
+		}
+    </script>
+</head>
+<body>
+	<div id="app1"></div>
+	<div id="app2"></div>
+</body>
+</html>

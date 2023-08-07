@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>React Ex004 변수전달</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- React를 실행. -->
+    <!-- 주의: 사이트를 배포할 때는 "development.js"를 "production.min.js"로 대체하세요. -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://ga.jspm.io/npm:es-module-shims@1.4.6/dist/es-module-shims.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React HelloWorld!!!!</title>
+    <style>
+      div.divBox{
+        border : 1px solid gray;
+        border-radius: 50px; text-align: center;
+      }
+    </style>
+    <script type="text/babel">
+    /*
+    */
+    function Header1({title}) {
+      console.log(title);
+      return (<h1>😀 {title} 😘</h1>)
+    }
+    function Header2(props) {
+      console.log(props);
+      return (<h1>😀 {props.title} 😘</h1>)
+    }
+    function Header3({title}) {
+      console.log(title);
+      return (<h1>😀 {`하하하하 ${title} ~~~`} 😘</h1>)
+    }
+    // 함수의 사용
+    function createTitle(title) {
+      if (title) {
+        return title;
+      } else {
+        return 'Default title';
+      }
+    }
+
+    function Header4({title}) {
+      console.log(title);
+      return (<h1>😀 {createTitle(title)} 😘</h1>)
+    }
+    // 삼항 연산자 사용
+    function Header5({title}) {
+      console.log(title);
+      return (<h1>😀 {title ? title : 'Default Title'} 😘</h1>)
+    }
+
+    // 중첩 요소의 표현
+    function HomePage() {
+      // 맵을 이용한 데이터의 반복
+      let names = "한놈,두식이,석상,너구리,오징어".split(",");
+      return (
+          <div className="divBox">
+           <Header1 title="변수전달 1111" />
+           <Header2 title="변수전달 2222"/>
+           <Header3 title="변수전달 3333"/>
+           <Header4 />
+           <Header5 />
+           <ul>
+            {names.map((name) => (
+              <li key={name}>{name}</li>
+            ))}
+          </ul>
+          </div>
+      );
+    }
+		window.onload = function(){
+      const domContainer = document.querySelector('#app1');
+      ReactDOM.render(<HomePage/>, domContainer);
+		}
+    </script>
+</head>
+<body>
+	<div id="app1"></div>
+	<div id="app2"></div>
+</body>
+</html>
